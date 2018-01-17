@@ -1,7 +1,6 @@
-package com.marino.conversor.load;
+package com.marino.quietstone.load;
 
-import com.marino.conversor.model.Product;
-import com.marino.conversor.model.Rate;
+import com.marino.quietstone.model.Rate;
 
 import java.util.ArrayList;
 import java.util.List;

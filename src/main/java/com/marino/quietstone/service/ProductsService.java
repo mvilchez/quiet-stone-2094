@@ -1,6 +1,6 @@
-package com.marino.conversor.service;
+package com.marino.quietstone.service;
 
-import com.marino.conversor.model.ProductDetails;
+import com.marino.quietstone.model.ProductDetails;
 
 import java.util.List;
 

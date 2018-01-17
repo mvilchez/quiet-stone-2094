@@ -1,4 +1,4 @@
-package com.marino.conversor.model;
+package com.marino.quietstone.model;
 
 public class Product {
     private String name;
