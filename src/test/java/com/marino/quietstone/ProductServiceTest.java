@@ -20,8 +20,8 @@ public class ProductServiceTest {
         rates = loadRates.loadRates();
         ProductsService productsService = new ProductsService();
         double first = productsService.getAmountIn(10.00,"USD", "EUR");
-        assertTrue (first==7.36);
+        assertEquals (first,7.36);
         double second = productsService.getAmountIn(10.00,"USD", "CAD");
-        assertTrue (second==10.01);
+        assertEquals (second,10.01);
     }
 }
