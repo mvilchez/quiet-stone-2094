@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadTransactions {
-    private List<Transaction> loadProducts() {
+    public List<Transaction> loadTransactions() {
         String jsonData = LoadHelper.readFile("transactions.json");
         JSONObject jobj = new JSONObject(jsonData);
         JSONArray jarr = new JSONArray(jobj.getJSONArray("keywords").toString());

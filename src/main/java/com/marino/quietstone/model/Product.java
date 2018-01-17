@@ -2,7 +2,7 @@ package com.marino.quietstone.model;
 
 public class Product {
     private String name;
-    private Long id;
+    private String id;
 
     public String getName() {
         return name;
@@ -12,11 +12,11 @@ public class Product {
         this.name = name;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
