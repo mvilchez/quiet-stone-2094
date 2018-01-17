@@ -56,24 +56,24 @@ public class ProductsService {
 
         double totalEur = 0.0;
         for (final Transaction transaction : productTransactions) {
-            totalEur += toEur(transaction.getAmount(), transaction.getCurrency());
+            totalEur += getAmountIn(transaction.getAmount(), transaction.getCurrency(), "EUR");
         }
         return productDetails;
     }
 
     /**
      * @param amount
-     * @param currency
+     * @param currencyFrom
+     * @param currencyTo
      * @return
      */
-    private double toEur(final Double amount, final String currency) {
+    public double getAmountIn(final Double amount, final String currencyFrom, final String currencyTo) {
         double result;
-        Rate toEuros = rates.get(currency);
-        if (toEuros != null && toEuros.getTo().equalsIgnoreCase("EUR")) {
-            result = amount * toEuros.getRate();
-        } else if (toEuros.getTo().equalsIgnoreCase("EUR")){
-            Rate derivated = get(amount, toEuros.getTo());
-            result = amount * derivated.getRate();
+        Rate toCurrencyTo = rates.get(currencyFrom);
+        if (toCurrencyTo != null && toCurrencyTo.getTo().equalsIgnoreCase(currencyTo)) {
+            result = amount * toCurrencyTo.getRate();
+        } else {
+            result = getAmountIn(amount, toCurrencyTo.getTo(), currencyTo);
         }
         return result;
     }
