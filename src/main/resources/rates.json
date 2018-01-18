@@ -1,22 +1,32 @@
 [
   {
-    "from": "EUR",
-    "to": "USD",
-    "rate": "1.359"
+    "from": "CAD",
+    "to": "AUD",
+    "rate": "1.1"
+  },
+  {
+    "from": "AUD",
+    "to": "CAD",
+    "rate": "0.91"
   },
   {
     "from": "CAD",
     "to": "EUR",
-    "rate": "0.732"
-  },
-  {
-    "from": "USD",
-    "to": "EUR",
-    "rate": "0.736"
+    "rate": "0.52"
   },
   {
     "from": "EUR",
     "to": "CAD",
-    "rate": "1.366"
+    "rate": "1.92"
+  },
+  {
+    "from": "AUD",
+    "to": "USD",
+    "rate": "0.71"
+  },
+  {
+    "from": "USD",
+    "to": "AUD",
+    "rate": "1.41"
   }
 ]

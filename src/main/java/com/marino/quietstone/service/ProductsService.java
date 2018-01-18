@@ -3,7 +3,7 @@ package com.marino.quietstone.service;
 import com.marino.quietstone.load.LoadRates;
 import com.marino.quietstone.load.LoadTransactions;
 import com.marino.quietstone.model.Product;
-import com.marino.quietstone.model.ProductDetails;
+import com.marino.quietstone.model.ProductDetailsDTO;
 import com.marino.quietstone.model.Rate;
 import com.marino.quietstone.model.Transaction;
 
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductsService {
-    private Map<String, Rate> rates = new HashMap<String, Rate>();
+    private Map<String, Rate> rates;
 
     public ProductsService() {
         LoadRates loadRates = new LoadRates();
@@ -43,8 +43,8 @@ public class ProductsService {
      * @param productId
      * @return producto details
      */
-    private ProductDetails getProductDetails(final String productId) {
-        ProductDetails productDetails = new ProductDetails();
+    private ProductDetailsDTO getProductDetails(final String productId) {
+        ProductDetailsDTO productDetailsDTO = new ProductDetailsDTO();
         List<Transaction> productTransactions = new ArrayList<Transaction>();
         LoadTransactions loadTransactions = new LoadTransactions();
         List<Transaction> transactions = loadTransactions.loadTransactions();
@@ -53,12 +53,15 @@ public class ProductsService {
                 productTransactions.add(transaction);
             }
         }
+        productDetailsDTO.setProductId(productId);
+        productDetailsDTO.setTransactions(productTransactions);
 
         double totalEur = 0.0;
         for (final Transaction transaction : productTransactions) {
             totalEur += getAmountIn(transaction.getAmount(), transaction.getCurrency(), "EUR");
         }
-        return productDetails;
+        productDetailsDTO.setTotal(totalEur);
+        return productDetailsDTO;
     }
 
     /**
