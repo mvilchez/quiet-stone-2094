@@ -28,4 +28,14 @@ public class Rate {
     public void setRate(Double rate) {
         this.rate = rate;
     }
+
+
+    @Override
+    public String toString() {
+        return "Rate{" +
+                "from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                ", rate=" + rate +
+                '}';
+    }
 }

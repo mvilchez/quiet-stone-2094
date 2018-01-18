@@ -7,13 +7,10 @@ import com.marino.quietstone.model.ProductDetailsDTO;
 import com.marino.quietstone.model.Rate;
 import com.marino.quietstone.model.Transaction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductsService {
-    private Map<String, Rate> rates;
+    private List<Rate> rates;
 
     public ProductsService() {
         LoadRates loadRates = new LoadRates();
@@ -72,11 +69,14 @@ public class ProductsService {
      */
     public double getAmountIn(final Double amount, final String currencyFrom, final String currencyTo) {
         double result;
-        Rate toCurrencyTo = rates.get(currencyFrom);
-        if (toCurrencyTo != null && toCurrencyTo.getTo().equalsIgnoreCase(currencyTo)) {
-            result = amount * toCurrencyTo.getRate();
-        } else {
-            result = getAmountIn(amount, toCurrencyTo.getTo(), currencyTo);
+        Optional<Rate> toCurrencyTo = rates.stream().filter(rate -> rate.getFrom().equalsIgnoreCase(currencyFrom) && rate.getTo().equalsIgnoreCase(currencyTo)).findFirst();
+        if (toCurrencyTo.isPresent()) {
+            System.out.println("Bingo! encontrado tipo de cambio directo: "+toCurrencyTo.get());
+            result = amount * toCurrencyTo.get().getRate();
+        } else{
+            Optional<Rate> toCurrencyTo2 = rates.stream().filter(rate -> rate.getFrom().equalsIgnoreCase(currencyFrom)).findFirst();
+            System.out.println("No hay cambio directo, volvemos a buscar hasta encontrar: "+toCurrencyTo2.get());
+            result = getAmountIn(amount* toCurrencyTo2.get().getRate(),toCurrencyTo2.get().getTo(), currencyTo);
         }
         return result;
     }

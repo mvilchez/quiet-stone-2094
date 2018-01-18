@@ -6,27 +6,29 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoadTransactions {
     public List<Transaction> loadTransactions() {
+        List<Transaction> transactions = new ArrayList<>();
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("transactions.json"))
-        {
+        //Get file from resources folder
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("transactions.json").getFile());
+        try (FileReader reader = new FileReader(file)) {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
 
-            JSONArray employeeList = (JSONArray) obj;
-            System.out.println(employeeList);
+            JSONArray transactionList = (JSONArray) obj;
 
-            //Iterate over employee array
-            employeeList.forEach( emp -> parseTransactionObject( (JSONObject) emp ) );
+            //Iterate over transaction array
+            transactionList.forEach(transaction -> {
+                transactions.add(parseTransactionObject((JSONObject) transaction));
+            });
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -35,25 +37,22 @@ public class LoadTransactions {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        List<Transaction> transactions = new ArrayList<Transaction>();
         return transactions;
     }
 
-    private static void parseTransactionObject(JSONObject employee)
-    {
-        //Get employee object within list
-        JSONObject employeeObject = (JSONObject) employee.get("employee");
+    private static Transaction parseTransactionObject(JSONObject transactionJson) {
+        //Get transaction sku
+        String sku = (String) transactionJson.get("sku");
 
-        //Get employee first name
-        String firstName = (String) employeeObject.get("firstName");
-        System.out.println(firstName);
+        //Get transaction amount
+        String amount = (String) transactionJson.get("amount");
 
-        //Get employee last name
-        String lastName = (String) employeeObject.get("lastName");
-        System.out.println(lastName);
-
-        //Get employee website name
-        String website = (String) employeeObject.get("website");
-        System.out.println(website);
+        //Get transaction currency
+        String currency = (String) transactionJson.get("currency");
+        Transaction transaction = new Transaction();
+        transaction.setProductId(sku);
+        transaction.setAmount(Double.parseDouble(amount));
+        transaction.setCurrency(currency);
+        return transaction;
     }
 }
