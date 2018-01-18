@@ -19,4 +19,13 @@ public class Product {
     public void setId(String id) {
         this.id = id;
     }
+
+    public boolean equals(Object o){
+        if (o instanceof Product){
+            Product temp = (Product)o;
+            if (this.id.equals(temp.getId()))
+                return true;
+        }
+        return false;
+    }
 }

@@ -22,7 +22,7 @@ public class ProductsService {
      *
      * @return list of products description
      */
-    private List<Product> getProductsList() {
+    public List<Product> getProductsList() {
         LoadTransactions loadTransactions = new LoadTransactions();
         List<Transaction> transactions = loadTransactions.loadTransactions();
         Map<String, Product> productMap = new HashMap<String, Product>();
@@ -40,7 +40,7 @@ public class ProductsService {
      * @param productId
      * @return producto details
      */
-    private ProductDetailsDTO getProductDetails(final String productId) {
+    public ProductDetailsDTO getProductDetails(final String productId) {
         ProductDetailsDTO productDetailsDTO = new ProductDetailsDTO();
         List<Transaction> productTransactions = new ArrayList<Transaction>();
         LoadTransactions loadTransactions = new LoadTransactions();
