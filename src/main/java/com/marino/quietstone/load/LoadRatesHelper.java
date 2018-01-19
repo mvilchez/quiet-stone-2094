@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +54,8 @@ public class LoadRatesHelper {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
         try {
-            LoadHelper loadHelper = new LoadHelper();
-            FileReader reader = loadHelper.readFile("rates.json");
+            JSONUrlHelper jsonUrlHelper = new JSONUrlHelper();
+            BufferedReader reader = jsonUrlHelper.getJSON("http://quiet-stone-2094.herokuapp.com/rates");
             if (reader != null) {
                 //Read JSON file
                 Object obj = jsonParser.parse(reader);
