@@ -1,9 +1,15 @@
 package com.marino.quietstone.model;
 
+/**
+ * Class Rate
+ *
+ * @author marino
+ * @since 1.0.0-SNAPSHOT
+ */
 public class Rate {
     private String from;
     private String to;
-    private Double rate;
+    private Double rateFee;
 
     public String getFrom() {
         return from;
@@ -21,12 +27,12 @@ public class Rate {
         this.to = to;
     }
 
-    public Double getRate() {
-        return rate;
+    public Double getRateFee() {
+        return rateFee;
     }
 
-    public void setRate(Double rate) {
-        this.rate = rate;
+    public void setRateFee(Double rateFee) {
+        this.rateFee = rateFee;
     }
 
 
@@ -35,7 +41,7 @@ public class Rate {
         return "Rate{" +
                 "from='" + from + '\'' +
                 ", to='" + to + '\'' +
-                ", rate=" + rate +
+                ", rateFee=" + rateFee +
                 '}';
     }
 }

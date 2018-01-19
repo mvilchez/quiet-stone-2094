@@ -1,5 +1,11 @@
 package com.marino.quietstone.model;
 
+/**
+ * Class Transaction
+ *
+ * @author marino
+ * @since 1.0.0-SNAPSHOT
+ */
 public class Transaction {
     private String productId;
     private Double amount;

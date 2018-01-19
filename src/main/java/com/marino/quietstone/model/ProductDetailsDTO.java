@@ -2,6 +2,12 @@ package com.marino.quietstone.model;
 
 import java.util.List;
 
+/**
+ * DTO class for details of a product
+ *
+ * @author marino
+ * @since 1.0.0-SNAPSHOT
+ */
 public class ProductDetailsDTO {
     private String productId;
     private List<Transaction> transactions;

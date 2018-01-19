@@ -1,5 +1,11 @@
 package com.marino.quietstone.model;
 
+/**
+ * Class Product
+ *
+ * @author marino
+ * @since 1.0.0-SNAPSHOT
+ */
 public class Product {
     private String name;
     private String id;
@@ -27,5 +33,12 @@ public class Product {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        return result;
     }
 }
